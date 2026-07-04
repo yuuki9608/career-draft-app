@@ -1,0 +1,42 @@
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #ececE6;
+  --color-surface: #ffffff;
+  --color-text: #23262b;
+  --color-text-muted: #63676e;
+  --color-primary: #33465f;
+  --color-primary-hover: #26374b;
+  --color-border: #d8d6cd;
+  --font-sans: -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  --font-serif: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "MS PMincho", serif;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --radius: 8px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  line-height: 1.4;
+}
+
+button {
+  font-family: inherit;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>職務経歴書ドラフト作成</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="app-header">
+    <p class="app-title">自己分析から職務経歴書の下書きを作る</p>
+    <p class="autosave-label" data-autosave-label></p>
+  </header>
+
+  <div class="progress-bar-wrap">
+    <nav class="progress-bar" data-progress-bar aria-label="入力の進み具合"></nav>
+  </div>
+
+  <main class="wizard-container">
+
+    <section class="wizard-step" data-step-id="intro">
+      <h1>自己分析から、職務経歴書の下書きをつくる</h1>
+      <p class="lead">
+        いくつかの質問に答えるだけで、職務経歴書の下書き文章を自動でつくります。
+        入力した内容はすべて<strong>あなたのブラウザの中だけ</strong>に保存され、サーバーには一切送信されません。
+      </p>
+      <div class="action-row">
+        <button type="button" class="btn btn-primary" data-action="start">はじめる</button>
+        <button type="button" class="btn btn-secondary" data-action="resume" data-resume-hint>前回の続きから</button>
+      </div>
+      <p class="danger-zone">
+        <button type="button" class="btn btn-link" data-action="clear-all">すべてのデータを消す</button>
+      </p>
+    </section>
+
+    <section class="wizard-step" data-step-id="profile">
+      <h2>基本情報</h2>
+      <p class="step-desc">未入力のままでもかまいません。</p>
+
+      <div class="field">
+        <label for="profile-name">お名前・ニックネーム</label>
+        <input type="text" id="profile-name" placeholder="例: 山田 太郎">
+      </div>
+
+      <div class="field">
+        <label for="profile-target-job">目指す仕事・応募職種</label>
+        <input type="text" id="profile-target-job" placeholder="例: 営業事務">
+      </div>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" data-action="prev">戻る</button>
+        <button type="button" class="btn btn-primary" data-action="next">次へ</button>
+      </div>
+    </section>
+
+    <section class="wizard-step" data-step-id="workHistory">
+      <h2>職歴・経験</h2>
+      <p class="step-desc">これまでの仕事やインターン、部活動・学生団体などの経験を入力してください。学生の方や未経験の方は0件のままで構いません。</p>
+
+      <p id="work-history-empty" class="empty-hint">まだ職歴がありません。「+ 経験を追加」から入力してください。</p>
+      <div id="work-history-list" class="repeat-list"></div>
+      <button type="button" id="work-history-add" class="btn btn-secondary">+ 経験を追加</button>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" data-action="prev">戻る</button>
+        <button type="button" class="btn btn-primary" data-action="next">次へ</button>
+      </div>
+    </section>
+
+    <section class="wizard-step" data-step-id="strengths">
+      <h2>強み・スキル</h2>
+      <p class="step-desc">当てはまるものを選んでください。特に自信があるものは「できる」を選ぶと、自己PR欄で使う具体的なエピソードを書けます。</p>
+
+      <div id="strengths-list"></div>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" data-action="prev">戻る</button>
+        <button type="button" class="btn btn-primary" data-action="next">次へ</button>
+      </div>
+    </section>
+
+    <section class="wizard-step" data-step-id="pcSkills">
+      <h2>PCスキル</h2>
+      <p class="step-desc">実務で使えるソフトを選んでください。</p>
+
+      <p id="pc-skills-empty" class="empty-hint">まだ登録されていません。「+ 追加」から入力してください。</p>
+      <div id="pc-skills-list" class="repeat-list"></div>
+      <button type="button" id="pc-skills-add" class="btn btn-secondary">+ 追加</button>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" data-action="prev">戻る</button>
+        <button type="button" class="btn btn-primary" data-action="next">次へ</button>
+      </div>
+    </section>
+
+    <section class="wizard-step" data-step-id="selfPr">
+      <h2>自己PRのもと</h2>
+      <p class="step-desc">「強み・スキル」で「できる」を選んだ項目から、自己PRのテーマを1〜3つ選びます。</p>
+
+      <div id="self-pr-suggestions" class="suggestion-list"></div>
+
+      <p id="self-pr-empty" class="empty-hint">まだテーマがありません。上の候補から選ぶか、自由に追加してください。</p>
+      <div id="self-pr-list" class="repeat-list"></div>
+      <button type="button" id="self-pr-add-custom" class="btn btn-secondary">+ 自由にテーマを追加</button>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" data-action="prev">戻る</button>
+        <button type="button" class="btn btn-primary" data-action="next">下書きを作成する</button>
+      </div>
+    </section>
+
+    <section class="wizard-step" data-step-id="result">
+      <h2>下書き</h2>
+      <p class="step-desc">内容は自由に書き直せます。編集した内容も自動で保存されます。</p>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-primary" id="draft-generate">下書きを生成する</button>
+      </div>
+
+      <div class="field">
+        <textarea id="draft-textarea" rows="20" placeholder="「下書きを生成する」を押すと、ここに文章が表示されます。"></textarea>
+      </div>
+      <pre id="draft-print-view" class="print-only"></pre>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" id="draft-copy">コピー</button>
+        <button type="button" class="btn btn-secondary" id="draft-download">テキストでダウンロード</button>
+        <button type="button" class="btn btn-secondary" id="draft-print">印刷してPDF保存</button>
+        <span id="copy-feedback" class="copy-feedback"></span>
+      </div>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" data-action="prev">戻る</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/data/templates-data.js"></script>
+<script src="js/core/dateUtils.js"></script>
+<script src="js/core/storage.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/wizard.js"></script>
+<script src="js/ui/repeatableList.js"></script>
+<script src="js/generator/sections.js"></script>
+<script src="js/generator/generateDraft.js"></script>
+<script src="js/ui/formBindings.js"></script>
+<script src="js/ui/resultView.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

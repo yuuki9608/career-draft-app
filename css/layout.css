@@ -1,0 +1,105 @@
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.app-title {
+  font-weight: 600;
+}
+
+.autosave-label {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.progress-bar-wrap {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.progress-bar {
+  counter-reset: step;
+  display: flex;
+  align-items: flex-start;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.wizard-container {
+  flex: 1;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.wizard-step {
+  display: none;
+}
+
+.wizard-step.is-active {
+  display: block;
+}
+
+.action-row {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.danger-zone {
+  margin-top: var(--space-xl);
+  text-align: right;
+}
+
+@media print {
+  .app-header, .progress-bar-wrap, .action-row, .danger-zone {
+    display: none !important;
+  }
+  .wizard-step[data-step-id="result"] > h2,
+  .wizard-step[data-step-id="result"] > .step-desc,
+  #draft-textarea {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+    white-space: pre-wrap;
+    font-family: var(--font-sans);
+    line-height: 1.8;
+  }
+}
+
+@media (max-width: 600px) {
+  .wizard-container {
+    padding: var(--space-lg) var(--space-md);
+  }
+  .app-header {
+    padding: var(--space-sm) var(--space-md);
+    flex-wrap: wrap;
+  }
+  .progress-step {
+    font-size: 0.6875rem;
+    gap: 0.25rem;
+  }
+  .progress-step::after {
+    width: 1.4rem;
+    height: 1.4rem;
+    font-size: 0.6875rem;
+  }
+  .progress-step::before {
+    top: 0.7rem;
+  }
+}
